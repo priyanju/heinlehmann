@@ -1,0 +1,66 @@
+<div class="modal_sec">
+    <div class="modal_heading">
+        <h3>Add User</h3>
+        <button type="button" class="close" aria-label="Close" (click)="onNoClick()" matTooltip="close">
+            <span aria-hidden="true">×</span>
+        </button>
+    </div>
+    <div class="dialog-form">
+        <div class="filter_sec">
+            <form [formGroup]="login" class="form_sec">
+                <div class="row">
+                    <mat-form-field appearance="outline">
+                        <mat-label>FirstName</mat-label>
+                        <input matInput formControlName="first_name" type="text" required>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                        <mat-label>LastName</mat-label>
+                        <input matInput formControlName="last_name" type="text" required>
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Email Id</mat-label>
+                        <input matInput formControlName="email_id" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                            ng-reflect-pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a" type="email" required>
+                    </mat-form-field>
+                    <mat-error *ngIf="login.get('email_id').hasError('email')"> Enter valid email address
+                    </mat-error>
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Password</mat-label>
+                        <input matInput formControlName="password" type="password" required>
+                    </mat-form-field>
+
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Mobile Number</mat-label>
+                        <input matInput formControlName="phone_number" maxlength="10" minlength="10"
+                            (keypress)="keyPress($event)" type="text" required>
+                    </mat-form-field>
+
+
+
+
+                    <mat-form-field appearance="outline">
+                        <mat-label>Remarks</mat-label>
+                        <input matInput formControlName="remarks" type="text" required>
+                    </mat-form-field>
+
+
+                    <mat-form-field>
+                        <mat-select placeholder="Select Role" matNativeControl required formControlName="role_id">
+                            <mat-option *ngFor="let operator of roles_list" [value]="operator.id">{{operator.role_name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+
+                </div>
+                <div class="form-button modal_button">
+                    <button mat-raised-button [disabled]="login.invalid" (click)="logintest()"
+                        class="Submit">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

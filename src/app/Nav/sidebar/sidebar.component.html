@@ -1,0 +1,88 @@
+<mat-sidenav-container>
+  <mat-sidenav #drawer [opened]="opened" [mode]="mode" *ngIf="nav.visible">
+    <div class="logo_wrapper">
+      <img src="../../../assets/img/Group 481.png">
+    </div>
+    <!-- <h2>Priya</h2> -->
+    <div class="navigation_wrapper" *ngIf="usertype_id === '2'">
+      <!-- <button mat-button routerLink="./admin_dashboard" routerLinkActive="active-link"><img src="../../../assets/img/web-page-home.svg">Dashboard</button> -->
+      <!-- <button mat-button routerLink="./notify" routerLinkActive="active-link"><img src="../../../assets/img/notification.svg">Notifications</button> -->
+      <!-- <button mat-button routerLink="./profile" routerLinkActive="active-link"><img src="../../../assets/img/avatar.svg">Vendor</button> -->
+      <button mat-button routerLink="./user" routerLinkActive="active-link"><span class="material-icons">
+          person_outline
+        </span>User</button>
+      <button mat-button routerLink="./machine_list" routerLinkActive="active-link">
+        <span class="material-icons">
+          format_list_bulleted
+        </span>Machine</button>
+      <!-- <button mat-button routerLink="./report" routerLinkActive="active-link"><img src="../../../assets/img/folder (4).svg">Report</button> -->
+
+      <!-- <button mat-button routerLink="./machine-detail" routerLinkActive="active-link"><img src="../../../assets/img/folder (4).svg">Machine Details</button> -->
+      <button mat-button routerLink="./dashboard" routerLinkActive="active-link">
+        <span class="material-icons">
+          bar_chart
+        </span>Overview</button>
+      <button mat-button routerLink="./report" routerLinkActive="active-link">
+        <span class="material-icons">
+          content_copy
+        </span>Report</button>
+    </div>
+
+
+
+    <div class="navigation_wrapper" *ngIf="usertype_id === '1'">
+      <button mat-button routerLink="./admin_dashboard" routerLinkActive="active-link">
+        <span class="material-icons">
+          widgets
+        </span>Dashboard</button>
+      <!-- <button mat-button routerLink="./notify" routerLinkActive="active-link"><img src="../../../assets/img/notification.svg">Notifications</button> -->
+      <button mat-button routerLink="./profile" routerLinkActive="active-link"><span class="material-icons">
+        person_pin
+        </span>Vendor</button>
+      <button mat-button routerLink="./user" routerLinkActive="active-link">
+        <span class="material-icons">
+          person_outline
+        </span>User</button>
+      <!-- <button mat-button routerLink="./dashboard" routerLinkActive="active-link"><img src="../../../assets/img/folder (4).svg">Overview</button> -->
+      <button mat-button routerLink="./report" routerLinkActive="active-link"><span class="material-icons">
+        content_copy
+        </span>Report</button>
+      <!-- <button mat-button routerLink="./machine_list" routerLinkActive="active-link"><img src="../../../assets/img/folder (4).svg">Machine</button> -->
+      <!-- <button mat-button routerLink="./report" routerLinkActive="active-link"><img src="../../../assets/img/folder (4).svg">Report</button> -->
+      <!-- 
+      <button mat-button routerLink="./machine-detail" routerLinkActive="active-link"><img src="../../../assets/img/folder (4).svg">Machine Details</button> -->
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class="header" *ngIf="nav.visible">
+      <mat-toolbar-row class="header_area">
+        <div class="company_name">
+          <!-- <button type="button" mat-icon-button (click)="drawer.toggle()" class="">
+            <mat-icon><span class="material-icons">menu</span></mat-icon>
+          </button> -->
+<!-- 
+          <button mat-icon-button aria-label="Example icon-button with a heart icon" (click)="sidenav.toggle()" class="toggle-btn">
+          </button> -->
+            <span>
+            <h2>{{first_name}}</h2>
+          </span>
+        </div>
+        <div class="setting_sec">
+          <button mat-icon-button (click)="close()"><i class="material-icons">power_settings_new</i></button>
+        </div>
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <div class="container-fluid">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+<!-- <a  class="user_link" (click)="open()"><mat-icon class="v-align-middle edit">edit</mat-icon></a>
+            <a class="logout" (click)="close()">
+              <img src="../../../assets/images/signout.svg">
+              <i class="fa fa-sign-out" aria-hidden="true"></i>
+            </a> -->
+
+<!-- <mat-icon (click)="openDialog()">edit</mat-icon> -->

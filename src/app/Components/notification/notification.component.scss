@@ -1,0 +1,32 @@
+mat-card{
+    text-align: center;
+    box-shadow: none!important;
+    border: 1px solid #e0e0e0;
+    margin-bottom: 30px;
+    h2{
+        font-size: 16px;
+    }
+    h3{
+        font-size: 16px;
+        font-weight: 600;
+    }
+    span{
+        display: block;
+        &.number {
+            height: 40px;
+            width: 40px;
+            background: #f69320;
+            display: flex;
+            align-items: center;
+            color: #fff;
+            justify-content: center;
+            border-radius: 50%;
+            font-size: 16px;
+            margin: -35px auto 20px auto;
+        }
+    }
+}
+
+mat-slide-toggle {
+    margin-top: 10px;
+}

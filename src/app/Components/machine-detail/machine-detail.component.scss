@@ -1,0 +1,76 @@
+.chart_card{
+    padding: 0;
+      background-color: transparent;
+      box-shadow: none;
+    mat-card-title{
+      color: #363636;
+      font-size:20px;
+  }
+  mat-card{
+      margin: 0;
+      margin-right: 10px;
+
+  }
+  mat-card.card{
+    padding: 20px;
+  h2.style-2{
+      font-size: 46px;
+      color: #fff;
+      span{
+          font-size: 14px;
+          font-weight: 300;
+      }
+  }
+  label{
+      color: #fff;
+  }
+  &.red{
+      background-color: #F25D27;
+  }
+  &.green{
+      background-color: #03A696;
+  }
+}
+  &.speedo_meter{
+      mat-card{
+        label{
+            color:#000;
+        }
+      }
+}
+mat-card-subtitle{
+    margin-top: 10px;
+}
+}
+.circle {
+    display: inline-block;
+    border: 2px solid #000;
+    height: 14px;
+    width: 14px;
+    margin-right: 6px;
+    border-radius: 50%;
+    &.no-data{
+        border-color:#6B6B6B;
+        &.active{
+            background-color: #6B6B6B;
+        }
+    }
+    &.running{
+        border-color:#03A696;
+        &.active{
+            background-color: #03A696;
+        }
+    }
+    &.idle{
+        border-color:#F1BB0C;
+        &.active{
+            background-color: #F1BB0C;
+        }
+    }
+    &.stop{
+        border-color:#F25D27;
+        &.active{
+            background-color: #F25D27;
+        }
+    }
+}

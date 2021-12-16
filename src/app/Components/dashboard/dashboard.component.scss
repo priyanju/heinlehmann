@@ -1,0 +1,202 @@
+.spinner {
+    background: rgba(0, 0, 0, 0.82);
+    height: 100vh;
+    opacity: 0.9;
+    position: fixed;
+    display: flex;
+     -webkit-align-items: center;
+     -moz-align-items: center;
+      -ms-align-items: center;
+      -o-align-items: center;
+       align-items: center;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100% !important;
+    z-index: 99999;
+}
+
+.spinner img {
+    width: 90px;
+    margin-top: -130px;
+}
+
+
+.mat-card-avatar {
+    height: 42px;
+    width: 42px;
+    background-size: contain;
+}
+::ng-deep .owl-carousel .owl-nav.disabled, 
+::ng-deep .owl-carousel .owl-dots.disabled{
+    display: block!important;
+}
+::ng-deep .owl-theme .owl-nav [class*=owl-] {
+    color: #FFF;
+    background: #F69320;
+    border-radius: 50%;
+    -webkit-display: flex;
+    -moz-display: flex;
+    -ms-display: flex;
+    -o-display: flex;
+     display: flex;    
+      -webkit-align-items: center;
+     -moz-align-items: center;
+      -ms-align-items: center;
+      -o-align-items: center;
+       align-items: center;
+    justify-content: center;
+    height: 32px;
+    width: 32px;
+    
+}
+::ng-deep .owl-theme .owl-nav .owl-prev{
+    position: absolute;
+    right: 45px;
+    top: -52px;
+}
+::ng-deep .owl-theme .owl-nav .owl-next{
+    position: absolute;
+    right: 0;
+    top: -52px;
+}
+mat-card{
+    margin: 10px 0;
+    box-shadow: none!important;
+    border: 1px solid #E0E0E0;
+    .mat-card-header .mat-card-title {
+        margin-bottom: 6px;
+    }
+    &.vendor_card{
+        &:hover{
+            border:1px solid #F69320;
+            }
+        mat-card-subtitle{
+            margin-bottom: 0;
+        }
+        &.selected{
+            border:1px solid #ccc;
+        }
+        img.tick {
+            max-width: 24px;
+            position: absolute;
+            bottom: 15px;
+            right: 15px;
+        }
+    }
+}
+.sub_header{
+    -webkit-display: flex;
+    -moz-display: flex;
+    -ms-display: flex;
+    -o-display: flex;
+     display: flex;
+     -webkit-align-items: space-between;
+     -moz-align-items: space-between;
+      -ms-align-items: space-between;
+      -o-align-items: space-between;
+       align-items: space-between;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    mat-form-field{
+        margin-left: 20px;
+    }
+}
+.chart_card{
+    mat-card-title{
+      color: #363636;
+      font-size:20px;
+  }
+  mat-card{
+      margin: 0;
+      margin-right: 10px;
+      h2{
+        margin: 0;
+        font-size:24px;
+        color: #fff;
+        margin-bottom: 5px;
+          span{
+              font-size: 14px;
+              font-weight: 300;
+          }
+      }
+      label{
+          color: #fff;
+      }
+      &.red{
+          background-color: #F25D27;
+      }
+      &.green{
+          background-color: #03A696;
+      }
+    
+  }
+
+  mat-card{
+    margin: 0;
+    margin-right: 10px;
+    h4{
+        font-size: 18px;
+        color: #fff;
+        span{
+            font-size: 14px;
+            font-weight: 300;
+        }
+    }
+    label{
+        color: #fff;
+    }
+    &.red{
+        background-color: #F25D27;
+    }
+    &.green{
+        background-color: #03A696;
+    }
+  
+}
+  &.speedo_meter{
+      mat-card{
+        label{
+            color:#000;
+        }
+      }
+}
+}
+.circle {
+    display: inline-block;
+    border: 2px solid #000;
+    height: 14px;
+    width: 14px;
+    margin-right: 6px;
+    border-radius: 50%;
+    &.no-data{
+        border-color:#6B6B6B;
+        &.active{
+            background-color: #6B6B6B;
+        }
+    }
+    &.running{
+        border-color:#03A696;
+        &.active{
+            background-color: #03A696;
+        }
+    }
+    &.idle{
+        border-color:#F1BB0C;
+        &.active{
+            background-color: #F1BB0C;
+        }
+    }
+    &.stop{
+        border-color:#F25D27;
+        &.active{
+            background-color: #F25D27;
+        }
+    }
+}
+mat-card-actions{
+    button{
+        margin-bottom: 15px;
+    }
+}

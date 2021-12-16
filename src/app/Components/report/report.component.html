@@ -1,0 +1,97 @@
+<div class="page_sec">
+  <div *ngIf="myLoader" class="spinner">
+    <img src="../../../assets/img/spinner.gif">
+  </div>
+  <form [formGroup]="login" (ngSubmit)="logintest()" class="report_form">
+    <div *ngIf="usertype_id === '1'">
+      <mat-form-field appearance="outline">
+        <mat-select placeholder="Select Vendor" (selectionChange)="getsplit($event.value)" matNativeControl
+          formControlName="tenant_id" required>
+          <mat-option *ngFor="let vendor of vendaor_name" [value]="vendor.id">
+            {{vendor.tenant_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="select_machine">
+      <mat-form-field appearance="outline">
+        <mat-select placeholder="Select Machine" matNativeControl formControlName="machine_id" required>
+          <mat-option *ngFor="let machine of machine_response" [value]="machine.id">
+            {{machine.machine_name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div *ngIf="machine_response?.length==0" class="no_data_found">
+        <h6>No Machine found</h6>
+      </div>
+    </div>
+
+    <!-- <mat-form-field appearance="outline">
+        <mat-label>Select Date</mat-label>
+        <mat-date-range-input [rangePicker]="picker">
+          <input matStartDate placeholder="Start date" formControlName="start_date">
+          <input matEndDate placeholder="End date" formControlName="end_date">
+        </mat-date-range-input>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-date-range-picker #picker></mat-date-range-picker> -->
+    <!-- </mat-form-field> -->
+    <mat-form-field appearance="outline">
+      <input matInput [matDatepicker]="picker" placeholder="Select Start Date" formControlName="start_date">
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <input matInput [matDatepicker]="picker1" placeholder="Select End Date" formControlName="end_date">
+      <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+      <mat-datepicker #picker1></mat-datepicker>
+    </mat-form-field>
+    <button class="btn filter_btn">SUBMIT</button>
+  </form>
+
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Date</th>
+          <th>Machine Name</th>
+          <th>Vendor Name</th>
+          <th>Machine Running Time (HH:MM:SS)</th>
+          <th>EBH Temperature Drive End MIN and MAX value (°C)</th>
+          <th>EBH Temperature Non-Drive End MIN and MAX Value(°C)</th>
+          <th>Rubber Buffer Level L MIN and MAX Value (mm)</th>
+          <th>Rubber Buffer Level R MIN and MAX Value (mm)</th>
+          <th>Inclination Spring Level L MIN and MAX Value (mm)</th>
+          <th>Inclination Spring Level R MIN and MAX Value (mm)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let table of report ;let i=index">
+          <td>{{i+1}}</td>
+          <td>{{table.date}}</td>
+          <td>{{table.machine_name}}</td>
+          <td>{{table.vendor_name}}</td>
+          <td>{{table.actual_working_hours}}</td>
+          <td>{{table.temp_and_buffer.ebh_temp_drive_end.min.value}} -
+            {{table.temp_and_buffer.ebh_temp_drive_end.max.value}}</td>
+          <td>{{table.temp_and_buffer.ebh_temp_nondrive_end.min.value}} -
+            {{table.temp_and_buffer.ebh_temp_nondrive_end.max.value}}</td>
+
+          <td>{{table.temp_and_buffer.buffer_level_l.min.value}} - {{table.temp_and_buffer.buffer_level_l.max.value}}
+          </td>
+          <td>{{table.temp_and_buffer.buffer_level_r.min.value}} - {{table.temp_and_buffer.buffer_level_r.max.value}}
+          </td>
+          <td>{{table.temp_and_buffer.spring_level_l.min.value}} - {{table.temp_and_buffer.spring_level_l.max.value}}
+          </td>
+          <td>{{table.temp_and_buffer.spring_level_r.min.value}} - {{table.temp_and_buffer.spring_level_r.max.value}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div *ngIf="report?.length==0" class="no_data_found">
+      <h6>No Data found</h6>
+    </div>
+  </div>
+
+</div>

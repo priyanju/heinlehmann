@@ -1,0 +1,461 @@
+<div class="page_sec">
+    <div *ngIf="myLoader" class="spinner">
+        <img src="../../../assets/img/spinner.gif">
+    </div>
+    <div *ngIf="usertype_id === '1'">
+        <h2 class="page_title">Overview - {{latched}}</h2>
+    </div>
+    <div class="sub_header">
+        <form [formGroup]="login" (ngSubmit)="logintest()" autocomplete="off">
+            <mat-form-field appearance="outline">
+                <mat-select placeholder="Select Machine" matNativeControl formControlName="machine_id" required>
+                    <mat-option *ngFor="let machine of machine_response" [value]="machine.id">
+                        {{machine.machine_name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div *ngIf="machine_response?.length==0" class="no_data_found">
+                <h6>No Machine found</h6>
+            </div>
+            <mat-form-field appearance="outline">
+                <input matInput [matDatepicker]="picker" placeholder="Choose a date" formControlName="date">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <button class="btn filter_btn ml-2">SUBMIT</button>
+        </form>
+        <!-- <button mat-mini-fab (click)="refresh()" class="ml-2 refresh_btn">
+            <mat-icon><span class="material-icons">
+                    cached
+                </span></mat-icon>
+        </button> -->
+
+
+    </div>
+
+    <div class="container-fluid charts_wrapper">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <mat-card class="chart_card">
+                    <div class="mat-header">
+                        <mat-card-title>Machine Running Time (HH:MM:SS)</mat-card-title>
+                    </div>
+                    <mat-card-content>
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <mat-card class="red">
+                                    <h2>{{dash_result?.machine_running_time?.previous_day}}
+                                        <span></span>
+                                    </h2>
+
+                                    <label>Previous day</label>
+                                </mat-card>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-card class="green">
+                                    <h2>{{dash_result?.machine_running_time?.today}} <span></span></h2>
+                                    <label>Today</label>
+                                </mat-card>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-card class="red">
+                                    <h2>{{dash_result?.machine_running_time?.next_day}} <span></span>
+                                    </h2>
+                                    <label>Next day</label>
+                                </mat-card>
+                            </div>
+                        </div>
+                    </mat-card-content>
+
+                </mat-card>
+            </div>
+
+
+
+        </div>
+        <div class="row justify-content-center">
+            <!-- <div class="col-sm-12 col-md-12 col-lg-6">
+            <mat-card class="chart_card speedo_meter">
+                <div class="mat-header">
+                  <mat-card-title>EBH Temperature Drive End</mat-card-title>
+              
+                </div>
+                <mat-card-content>
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <mat-card >
+                                <img src="../../../assets/img/Mask Group 10.png" style="width:100%">
+                                <label>Previous day</label>
+                            </mat-card>
+                        </div>    
+                        <div class="col-md-4">
+                            <mat-card >
+                                <img src="../../../assets/img/Mask Group 13.png" style="width:100%">
+                                <label>Today</label>
+                            </mat-card>
+                        </div>    
+                        <div class="col-md-4">
+                            <mat-card >
+                                <img src="../../../assets/img/Mask Group 10.png" style="width:100%">
+                                <label>Next day</label>
+                            </mat-card>
+                        </div>    
+                    </div>
+                </mat-card-content>
+              
+              </mat-card>
+        </div> -->
+
+            <!-- 
+        <div class="col-sm-12 col-md-12 col-lg-6">
+            <mat-card class="chart_card speedo_meter">
+                <div class="mat-header">
+                  <mat-card-title>EBH Temperature Non-Drive End</mat-card-title>
+              
+                </div>
+                <mat-card-content>
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <mat-card >
+                                <img src="../../../assets/img/Mask Group 10.png" style="width:100%">
+                                <label>Previous day</label>
+                            </mat-card>
+                        </div>    
+                        <div class="col-md-4">
+                            <mat-card >
+                                <img src="../../../assets/img/Mask Group 13.png" style="width:100%">
+                                <label>Today</label>
+                            </mat-card>
+                        </div>    
+                        <div class="col-md-4">
+                            <mat-card >
+                                <img src="../../../assets/img/Mask Group 10.png" style="width:100%">
+                                <label>Next day</label>
+                            </mat-card>
+                        </div>    
+                    </div>
+                </mat-card-content>
+              
+              </mat-card>
+        </div> -->
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-6">
+                <mat-card class="chart_card">
+                    <div class="mat-header">
+                        <mat-card-title>EBH Temperature Drive End (°C)</mat-card-title>
+
+                    </div>
+                    <mat-card-content>
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <mat-card class="red">
+                                    <h4>MAX Value : <span> {{dash_result?.ebh_temp_drive_end?.previous_day?.max?.value!=null  ? 
+                                    dash_result?.ebh_temp_drive_end?.previous_day?.max?.value : 'No MAX Value'}}</span>
+                                        <!-- <p  *ngIf ="dash_result?.ebh_temp_drive_end?.previous_day?.max?.value === 'null'"> no datas</p> -->
+                                    </h4>
+
+                                    <h4>MIN Value : <span>{{dash_result?.ebh_temp_drive_end?.previous_day?.min?.value !=null  ? 
+                                    dash_result?.ebh_temp_drive_end?.previous_day?.min?.value : 'No MIN value'}}</span>
+                                    </h4>
+
+                                    <label> Previous day</label>
+                                </mat-card>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-card class="green">
+                                    <h4>MAX Value :
+                                        <span>{{dash_result?.ebh_temp_drive_end?.today?.max?.value!=null  ? dash_result?.ebh_temp_drive_end?.today?.max?.value : 'No MAX Value'}}</span>
+                                        <p *ngIf="dash_result?.ebh_temp_drive_end?.today?.max?.value === 'null'">no
+                                            found
+                                        </p>
+                                    </h4>
+                                    <h4>MIN Value :
+                                        <span>{{dash_result?.ebh_temp_drive_end?.today?.min?.value !=null  ? dash_result?.ebh_temp_drive_end?.today?.min?.value : 'No MIN value'}}</span>
+                                    </h4>
+
+                                    <label> Today</label>
+                                </mat-card>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-card class="red">
+                                    <h4>MAX Value :
+                                        <span>{{dash_result?.ebh_temp_drive_end?.next_day?.max?.value!=null ? dash_result?.ebh_temp_drive_end?.next_day?.max?.value : 'No MAX Value'}}</span>
+                                    </h4>
+                                    <h4>MIN Value :
+                                        <span>{{dash_result?.ebh_temp_drive_end?.next_day?.min?.value!=null ? dash_result?.ebh_temp_drive_end?.next_day?.min?.value : 'No MIN value'}}</span>
+                                    </h4>
+
+                                    <label> Next day</label>
+                                </mat-card>
+                            </div>
+                        </div>
+                    </mat-card-content>
+
+                </mat-card>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-6">
+                <mat-card class="chart_card">
+                    <div class="mat-header">
+                        <mat-card-title>EBH Temperature Non-Drive End (°C)</mat-card-title>
+
+                    </div>
+                    <mat-card-content>
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <mat-card class="red">
+                                    <h4>MAX Value :
+                                        <span>{{dash_result?.ebh_temp_nondrive_end?.previous_day?.max?.value!=null ? dash_result?.ebh_temp_nondrive_end?.previous_day?.max?.value : 'No MAX Value'}}</span>
+                                    </h4>
+                                    <h4>MIN Value :
+                                        <span>{{dash_result?.ebh_temp_nondrive_end?.previous_day?.min?.value!=null ? dash_result?.ebh_temp_nondrive_end?.previous_day?.min?.value : 'No MIN value'}}</span>
+                                    </h4>
+
+                                    <label> Previous day</label>
+                                </mat-card>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-card class="green">
+                                    <h4>MAX Value :
+                                        <span>{{dash_result?.ebh_temp_nondrive_end?.today?.max?.value!=null ? dash_result?.ebh_temp_nondrive_end?.today?.max?.value : 'No MAX Value'}}</span>
+                                    </h4>
+                                    <h4>MIN Value :
+                                        <span>{{dash_result?.ebh_temp_nondrive_end?.today?.min?.value!=null ? dash_result?.ebh_temp_nondrive_end?.today?.min?.value : 'No MIN value'}}</span>
+                                    </h4>
+
+                                    <label> Today</label>
+                                </mat-card>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-card class="red">
+                                    <h4>MAX Value :
+                                        <span>{{dash_result?.ebh_temp_nondrive_end?.next_day?.max?.value!=null ? dash_result?.ebh_temp_nondrive_end?.next_day?.max?.value : 'No MAX Value'}}</span>
+                                    </h4>
+                                    <h4>MIN Value :
+                                        <span>{{dash_result?.ebh_temp_nondrive_end?.next_day?.min?.value!=null ? dash_result?.ebh_temp_nondrive_end?.next_day?.min?.value : 'No MIN value'}}</span>
+                                    </h4>
+
+                                    <label> Next day</label>
+                                </mat-card>
+                            </div>
+                        </div>
+                    </mat-card-content>
+
+                </mat-card>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-6">
+                <mat-card class="chart_card">
+                    <div class="mat-header">
+                        <mat-card-title>Rubber Buffer level L (mm)</mat-card-title>
+
+                    </div>
+                    <mat-card-content>
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <mat-card class="red">
+                                    <h4>MAX Value :
+                                        <span>{{dash_result?.buffer_level_l?.previous_day?.max?.value!=null ? dash_result?.buffer_level_l?.previous_day?.max?.value : 'No MAX Value'}}</span>
+                                    </h4>
+                                    <h4>MIN Value :
+                                        <span>{{dash_result?.buffer_level_l?.previous_day?.min?.value!=null ? dash_result?.buffer_level_l?.previous_day?.min?.value : 'No MIN value'}}</span>
+                                    </h4>
+
+                                    <label> Previous day</label>
+                                </mat-card>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-card class="green">
+                                    <h4>MAX Value :
+                                        <span>{{dash_result?.buffer_level_l?.today?.max?.value!=null ? dash_result?.buffer_level_l?.today?.max?.value : 'No MAX Value'}}</span>
+                                    </h4>
+                                    <h4>MIN Value :
+                                        <span>{{dash_result?.buffer_level_l?.today?.min?.value!=null ? dash_result?.buffer_level_l?.today?.min?.value : 'No MIN value'}}</span>
+                                    </h4>
+
+                                    <label> Today</label>
+                                </mat-card>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-card class="red">
+                                    <h4>MAX Value :
+                                        <span>{{dash_result?.buffer_level_l?.next_day?.max?.value!=null ? dash_result?.buffer_level_l?.next_day?.max?.value : 'No MAX Value'}}</span>
+                                    </h4>
+                                    <h4>MIN Value :
+                                        <span>{{dash_result?.buffer_level_l?.next_day?.min?.value!=null ? dash_result?.buffer_level_l?.next_day?.min?.value : 'No MIN value'}}</span>
+                                    </h4>
+
+                                    <label> Next day</label>
+                                </mat-card>
+                            </div>
+                        </div>
+                    </mat-card-content>
+
+                </mat-card>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-6">
+                <mat-card class="chart_card">
+                    <div class="mat-header">
+                        <mat-card-title>Rubber Buffer Level R (mm)</mat-card-title>
+
+                    </div>
+                    <mat-card-content>
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <mat-card class="red">
+                                    <h4>MAX Value :
+                                        <span>{{dash_result?.buffer_level_r?.previous_day?.max?.value!=null ? dash_result?.buffer_level_r?.previous_day?.max?.value : 'No MAX Value'}}</span>
+                                    </h4>
+                                    <h4>MIN Value :
+                                        <span>{{dash_result?.buffer_level_r?.previous_day?.min?.value!=null ? dash_result?.buffer_level_r?.previous_day?.min?.value : 'No MIN value'}}</span>
+                                    </h4>
+
+                                    <label> Previous day</label>
+                                </mat-card>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-card class="green">
+                                    <h4>MAX Value :
+                                        <span>{{dash_result?.buffer_level_r?.today?.max?.value!=null ? dash_result?.buffer_level_r?.today?.max?.value : 'No MAX Value'}}</span>
+                                    </h4>
+                                    <h4>MIN Value :
+                                        <span>{{dash_result?.buffer_level_r?.today?.min?.value!=null ? dash_result?.buffer_level_r?.today?.min?.value : 'No MIN value'}}</span>
+                                    </h4>
+
+                                    <label> Today</label>
+                                </mat-card>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-card class="red">
+                                    <h4>MAX Value :
+                                        <span>{{dash_result?.buffer_level_r?.next_day?.max?.value!=null ? dash_result?.buffer_level_r?.next_day?.max?.value : 'No MAX Value'}}</span>
+                                    </h4>
+                                    <h4>MIN Value :
+                                        <span>{{dash_result?.buffer_level_r?.next_day?.min?.value!=null ? dash_result?.buffer_level_r?.next_day?.min?.value : 'No MIN value'}}</span>
+                                    </h4>
+
+                                    <label> Next day</label>
+                                </mat-card>
+                            </div>
+                        </div>
+                    </mat-card-content>
+
+                </mat-card>
+            </div>
+
+
+        </div>
+
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-6">
+                <mat-card class="chart_card">
+                    <div class="mat-header">
+                        <mat-card-title>Inclination Spring Level L (mm)</mat-card-title>
+
+                    </div>
+                    <mat-card-content>
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <mat-card class="red">
+                                    <h4>MAX Value :
+                                        <span>{{dash_result?.spring_level_l?.previous_day?.max?.value!=null ? dash_result?.spring_level_l?.previous_day?.max?.value : 'No MAX Value'}}</span>
+                                    </h4>
+                                    <h4>MIN Value :
+                                        <span>{{dash_result?.spring_level_l?.previous_day?.min?.value!=null ? dash_result?.spring_level_l?.previous_day?.min?.value : 'No MIN value'}}</span>
+                                    </h4>
+
+                                    <label> Previous day</label>
+                                </mat-card>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-card class="green">
+                                    <h4>MAX Value :
+                                        <span>{{dash_result?.spring_level_l?.today?.max?.value!=null ? dash_result?.spring_level_l?.today?.max?.value : 'No MAX Value'}}</span>
+                                    </h4>
+                                    <h4>MIN Value :
+                                        <span>{{dash_result?.spring_level_l?.today?.min?.value!=null ? dash_result?.spring_level_l?.today?.min?.value : 'No MIN value'}}</span>
+                                    </h4>
+
+                                    <label> Today</label>
+                                </mat-card>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-card class="red">
+                                    <h4>MAX Value :
+                                        <span>{{dash_result?.spring_level_l?.next_day?.max?.value!=null ? dash_result?.spring_level_l?.next_day?.max?.value : 'No MAX Value'}}</span>
+                                    </h4>
+                                    <h4>MIN Value :
+                                        <span>{{dash_result?.spring_level_l?.next_day?.min?.value!=null ? dash_result?.spring_level_l?.next_day?.min?.value : 'No MIN value'}}</span>
+                                    </h4>
+
+                                    <label> Next day</label>
+                                </mat-card>
+                            </div>
+                        </div>
+                    </mat-card-content>
+
+                </mat-card>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-6">
+                <mat-card class="chart_card">
+                    <div class="mat-header">
+                        <mat-card-title>Inclination Spring Level R (mm)</mat-card-title>
+
+                    </div>
+                    <mat-card-content>
+                        <div class="row no-gutters">
+                            <div class="col-md-4">
+                                <mat-card class="red">
+                                    <h4>MAX Value :
+                                        <span>{{dash_result?.spring_level_r?.previous_day?.max?.value!=null ? dash_result?.spring_level_r?.previous_day?.max?.value : 'No MAX Value'}}</span>
+                                    </h4>
+                                    <h4>MIN Value :
+                                        <span>{{dash_result?.spring_level_r?.previous_day?.min?.value!=null ? dash_result?.spring_level_r?.previous_day?.min?.value : 'No MIN value'}}</span>
+                                    </h4>
+
+                                    <label> Previous day</label>
+                                </mat-card>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-card class="green">
+                                    <h4>MAX Value :
+                                        <span>{{dash_result?.spring_level_r?.today?.max?.value!=null ? dash_result?.spring_level_r?.today?.max?.value : 'No MAX Value'}}</span>
+                                    </h4>
+                                    <h4>MIN Value :
+                                        <span>{{dash_result?.spring_level_r?.today?.min?.value!=null ? dash_result?.spring_level_r?.today?.min?.value : 'No MIN value'}}</span>
+                                    </h4>
+
+                                    <label> Today</label>
+                                </mat-card>
+                            </div>
+                            <div class="col-md-4">
+                                <mat-card class="red">
+                                    <h4>MAX Value :
+                                        <span>{{dash_result?.spring_level_r?.next_day?.max?.value!=null ? dash_result?.spring_level_r?.next_day?.max?.value : 'No MAX Value'}}</span>
+                                    </h4>
+                                    <h4>MIN Value :
+                                        <span>{{dash_result?.spring_level_r?.next_day?.min?.value!=null ? dash_result?.spring_level_r?.next_day?.min?.value : 'No MIN value'}}</span>
+                                    </h4>
+
+                                    <label> Next day</label>
+                                </mat-card>
+                            </div>
+                        </div>
+                    </mat-card-content>
+
+                </mat-card>
+            </div>
+
+
+        </div>
+    </div>
+</div>

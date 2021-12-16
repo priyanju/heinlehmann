@@ -1,0 +1,155 @@
+<div class="page_sec">
+    <div *ngIf="myLoader" class="spinner">
+        <img src="../../../assets/img/spinner.gif">
+    </div>
+    <div class="title_wrapper" *ngIf="usertype_id === '1'">
+        <h2 class="page_title">Vendor List</h2>
+        <!-- <div class="table_search">
+            <input class="form-control" type="text" name="search" [(ngModel)]="searchText" placeholder="Search">
+        </div> -->
+    </div>
+    <div class="modal_sec two_form">
+        <div *ngFor="let machine of back ;let i=index " class="vendor_item">
+            <mat-card class="vendor_card selected" (click)="malok(machine.tenant_name,machine.id)">
+                <mat-card-header (click)="getmachine(machine,machine.id)">
+                    <div mat-card-avatar class="example-header-image"
+                        style="background-image: url('../../../assets/img/Ellipse\ 52.png');"></div>
+                    <mat-card-title>{{machine.tenant_name}}</mat-card-title>
+                    <mat-card-subtitle>{{machine.city}}</mat-card-subtitle>
+                </mat-card-header>
+                <img class="tick" src="../../../assets/img/check_circle-24px.svg">
+            </mat-card>
+        </div>
+
+        <!-- </div> -->
+
+
+
+
+    </div>
+
+</div>
+
+<!-- <div class="row sub_header">
+    <div class="col-md-12 col-lg-12 col-xl-6">
+        <h2 class="page_title">Overview</h2>
+    </div>
+    <div class="col-md-12 col-lg-12 col-xl-6 text-right">
+        <mat-form-field appearance="outline">
+            <mat-select placeholder="Select Machine" (selectionChange)="getmachine($event.value)" matNativeControl
+              required >
+              <mat-option *ngFor="let machine of machine_response" [value]="machine.id">
+                {{machine.machine_name}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        <mat-form-field appearance="outline">
+            <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+    </div>
+</div> -->
+
+<!-- <div class="charts_wrapper">
+    <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-6">
+            <mat-card class="chart_card">
+                <div class="mat-header">
+                  <mat-card-title>Machine Running Time</mat-card-title>
+              
+                </div>
+                <mat-card-content>
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <mat-card class="red">
+                                <h2 class="style-2">5hrs <span>15min</span></h2>
+                                <label>Previous day</label>
+                            </mat-card>
+                        </div>    
+                        <div class="col-md-4">
+                            <mat-card class="green">
+                                <h2 class="style-2">5hrs <span>15min</span></h2>
+                                <label>Today</label>
+                            </mat-card>
+                        </div>    
+                        <div class="col-md-4">
+                            <mat-card class="red">
+                                <h2 class="style-2">5hrs <span>15min</span></h2>
+                                <label>Next day</label>
+                            </mat-card>
+                        </div>    
+                    </div>
+                </mat-card-content>
+                
+              </mat-card>
+        </div>
+        <div class="col-sm-12 col-md-12 col-lg-6">
+            <mat-card class="chart_card">
+                <div class="mat-header">
+                  <mat-card-title>Machine Running Time</mat-card-title>
+                
+                </div>
+                <mat-card-content>
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <mat-card class="red">
+                                <h2 class="style-2">5hrs <span>15min</span></h2>
+                                <label>Previous day</label>
+                            </mat-card>
+                        </div>    
+                        <div class="col-md-4">
+                            <mat-card class="green">
+                                <h2 class="style-2">5hrs <span>15min</span></h2>
+                                <label>Today</label>
+                            </mat-card>
+                        </div>    
+                        <div class="col-md-4">
+                            <mat-card class="red">
+                                <h2 class="style-2">5hrs <span>15min</span></h2>
+                                <label>Next day</label>
+                            </mat-card>
+                        </div>    
+                    </div>
+                </mat-card-content>
+               
+              </mat-card>
+        </div>
+       
+       
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-sm-12 col-md-12 col-lg-6">
+            <mat-card class="chart_card speedo_meter">
+                <div class="mat-header">
+                  <mat-card-title>Machine Running Time</mat-card-title>
+              
+                </div>
+                <mat-card-content>
+                    <div class="row no-gutters">
+                        <div class="col-md-4">
+                            <mat-card >
+                                <img src="../../../assets/img/Mask Group 10.png" style="width:100%">
+                                <label>Previous day</label>
+                            </mat-card>
+                        </div>    
+                        <div class="col-md-4">
+                            <mat-card >
+                                <img src="../../../assets/img/Mask Group 11.png" style="width:100%">
+                                <label>Today</label>
+                            </mat-card>
+                        </div>    
+                        <div class="col-md-4">
+                            <mat-card >
+                                <img src="../../../assets/img/Mask Group 10.png" style="width:100%">
+                                <label>Next day</label>
+                            </mat-card>
+                        </div>    
+                    </div>
+                </mat-card-content>
+              
+              </mat-card>
+        </div>
+
+    </div>
+</div> -->

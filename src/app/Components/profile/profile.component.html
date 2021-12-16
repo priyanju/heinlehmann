@@ -1,0 +1,42 @@
+<div class="page_sec">
+    <div *ngIf="myLoader" class="spinner">
+        <img src="../../../assets/img/spinner.gif">
+    </div>
+    <div class="title_wrapper">
+        <h2 class="page_title">Vendor List</h2>
+        <mat-button-toggle-group name="fontStyle" aria-label="Font Style">
+            <!-- <mat-button-toggle value="bold"><span class="material-icons">border_all</span></mat-button-toggle>
+            <mat-button-toggle value="italic"><span class="material-icons">format_list_bulleted</span></mat-button-toggle> -->
+        </mat-button-toggle-group>
+        <button mat-mini-fab color="primary" (click)="user()"><span class="material-icons">add</span></button>
+    </div>
+
+    <div class="container-fluid card_wrapper">
+        <div class="row">
+            <div class="modal_sec two_form">
+
+                <div *ngFor="let machine of back ;let i=index" class="vendor_item" >
+                    <mat-card class="vendor_card text-center">
+                        <div class="image_warpper">
+                            <img src="../../../assets/img/Ellipse 52.png">
+                        </div>
+                        <mat-card-title>{{machine.users[0].tenant.tenant_name}}</mat-card-title>
+                        <mat-card-subtitle>{{machine.city}}</mat-card-subtitle>
+                        <mat-card-content>
+                            <span>{{machine.users[0].first_name}} {{machine.users[0].last_name}}</span>
+                            <span>{{machine.users[0].email_id}}</span>
+                            <span>{{machine.users[0].phone_number}}</span>
+                        </mat-card-content>
+                        <mat-card-actions>
+                            <button mat-mini-fab color="primary"><span (click)="edit_view(machine)"
+                                    class="material-icons">edit</span></button>
+                            <button mat-mini-fab color="accent"><span (click)="delete_view(machine.id)"
+                                    class="material-icons">delete</span></button>
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
